@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PudelkoLibrary
 {
-    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>, IComparable<Pudelko>
     {
         private UnitOfMeasure Unit;
 
@@ -171,6 +168,31 @@ namespace PudelkoLibrary
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public int CompareTo(Pudelko obj)
+        {
+            var p1Volume = this.Objetosc;
+            var p2Volume = obj.Objetosc;
+            if (p1Volume < p2Volume)
+                return 1;
+            if (p1Volume == p2Volume)
+            {
+                var p1Area = this.Pole;
+                var p2Area = obj.Pole;
+                if (p1Area < p2Area)
+                    return 1;
+                if (p1Area == p2Area)
+                {
+                    var p1SidesSum = this.A + this.B + this.C;
+                    var p2SidesSum = obj.A + obj.B + obj.C;
+                    if (p1SidesSum == p2SidesSum)
+                        return 0;
+                    if (p1SidesSum < p2SidesSum)
+                        return 1;
+                }
+            }
+            return -1;
         }
 
         public Pudelko(double? a = null, double? b = null, double? c = null, UnitOfMeasure unit = UnitOfMeasure.meter)
