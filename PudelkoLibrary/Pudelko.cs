@@ -8,10 +8,28 @@ namespace PudelkoLibrary
 {
     public class Pudelko
     {
-        public double A;
-        public double B;
-        public double C;
         private UnitOfMeasure Unit;
+
+        private double a, b, c;
+        public double A
+        {
+            get => Convert.ToDouble(a.ToString("0.000"));
+            private set { a = value; }
+        }
+        public double B
+        {
+            get => Convert.ToDouble(b.ToString("0.000"));
+            private set { b = value; }
+        }
+        public double C
+        {
+            get => Convert.ToDouble(c.ToString("0.000"));
+            private set { c = value; }
+        }
+
+        public double Objetosc { get => Math.Round((A * B * C), 9); }
+
+        public double Pole { get => Math.Round(2 * (A * B + A * C + B * C), 6); }
 
         public Pudelko(double? a = null, double? b = null, double? c = null, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
