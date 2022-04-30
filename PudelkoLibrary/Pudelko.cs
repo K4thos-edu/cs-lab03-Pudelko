@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PudelkoLibrary
 {
-    public class Pudelko : IFormattable
+    public class Pudelko : IFormattable, IEquatable<Pudelko>
     {
         private UnitOfMeasure Unit;
 
@@ -67,6 +67,33 @@ namespace PudelkoLibrary
                 default:
                     throw new FormatException();
             }
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj is Pudelko)
+            {
+                return Equals((Pudelko)obj);
+            }
+
+            return base.Equals(obj);
+        }
+        public bool Equals(Pudelko obj)
+        {
+            return (Objetosc == obj.Objetosc && Pole == obj.Pole);
+        }
+
+        public override int GetHashCode()
+        {
+            return A.GetHashCode() + B.GetHashCode() + C.GetHashCode() + Unit.GetHashCode();
+        }
+
+        public static bool operator ==(Pudelko obj1, Pudelko obj2)
+        {
+            return obj1.Equals(obj2);
+        }
+        public static bool operator !=(Pudelko obj1, Pudelko obj2)
+        {
+            return !obj1.Equals(obj2);
         }
 
         public Pudelko(double? a = null, double? b = null, double? c = null, UnitOfMeasure unit = UnitOfMeasure.meter)
