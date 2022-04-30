@@ -116,6 +116,17 @@ namespace PudelkoLibrary
             return new Pudelko(obj.Item1, obj.Item2, obj.Item3, UnitOfMeasure.milimeter);
         }
 
+        public static Pudelko operator +(Pudelko obj1, Pudelko obj2)
+        {
+            double[] a1 = (double[])obj1;
+            double[] a2 = (double[])obj2;
+
+            Array.Sort(a1);
+            Array.Sort(a2);
+
+            return new Pudelko(a1[0] + a2[0], a1[1] + a2[1], a1[2] + a2[2]);
+        }
+
         public Pudelko(double? a = null, double? b = null, double? c = null, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
             // Default dimensions: 10 cm × 10 cm × 10 cm
