@@ -69,6 +69,23 @@ namespace PudelkoLibrary
                     throw new FormatException();
             }
         }
+
+        public static Pudelko Parse(string input)
+        {
+            var arrString = input.Split(' ');
+            var arrDouble = new double[3];
+
+            for (int i = 0; i < arrString.Length; i++)
+            {
+                if (!double.TryParse(arrString[i], out double temp) || i == arrDouble.Length)
+                {
+                    throw new FormatException($"Wrong string format: {input}");
+                }
+                arrDouble[i] = temp;
+            }
+            return new Pudelko(arrDouble[0], arrDouble[1], arrDouble[2]);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is Pudelko)
