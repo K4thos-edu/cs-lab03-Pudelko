@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PudelkoLibrary
 {
-    public class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
+    public sealed class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
     {
         private UnitOfMeasure Unit;
 
