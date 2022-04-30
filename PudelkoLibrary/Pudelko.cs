@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PudelkoLibrary
 {
-    public class Pudelko : IFormattable, IEquatable<Pudelko>
+    public class Pudelko : IFormattable, IEquatable<Pudelko>, IEnumerable<double>
     {
         private UnitOfMeasure Unit;
 
@@ -143,6 +144,16 @@ namespace PudelkoLibrary
                         throw new ArgumentOutOfRangeException();
                 }
             }
+        }
+
+        public IEnumerator<double> GetEnumerator()
+        {
+            return new PudelkoEnumerator(this);
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
 
         public Pudelko(double? a = null, double? b = null, double? c = null, UnitOfMeasure unit = UnitOfMeasure.meter)
