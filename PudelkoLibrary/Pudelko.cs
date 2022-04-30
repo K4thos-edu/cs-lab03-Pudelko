@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PudelkoLibrary
 {
-    public class Pudelko
+    public class Pudelko : IFormattable
     {
         private UnitOfMeasure Unit;
 
@@ -30,6 +30,44 @@ namespace PudelkoLibrary
         public double Objetosc { get => Math.Round((A * B * C), 9); }
 
         public double Pole { get => Math.Round(2 * (A * B + A * C + B * C), 6); }
+
+        public override string ToString()
+        {
+            return ToString("m");
+        }
+
+        public string ToString(string format)
+        {
+            if (format == null)
+            {
+                return ToString("m", null);
+            }
+            return ToString(format, null);
+        }
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            var a = A;
+            var b = B;
+            var c = C;
+            switch (format)
+            {
+                case "m":
+                    return $"{a.ToString("0.000")} {format} × {b.ToString("0.000")} {format} × {c.ToString("0.000")} {format}";
+                case "cm":
+                    a = UnitOfMeasureMethods.Convert(A, UnitOfMeasure.meter, UnitOfMeasure.centimeter, 3);
+                    b = UnitOfMeasureMethods.Convert(B, UnitOfMeasure.meter, UnitOfMeasure.centimeter, 3);
+                    c = UnitOfMeasureMethods.Convert(C, UnitOfMeasure.meter, UnitOfMeasure.centimeter, 3);
+                    return $"{a.ToString("0.0")} {format} × {b.ToString("0.0")} {format} × {c.ToString("0.0")} {format}";
+                case "mm":
+                    a = UnitOfMeasureMethods.Convert(A, UnitOfMeasure.meter, UnitOfMeasure.milimeter, 3);
+                    b = UnitOfMeasureMethods.Convert(B, UnitOfMeasure.meter, UnitOfMeasure.milimeter, 3);
+                    c = UnitOfMeasureMethods.Convert(C, UnitOfMeasure.meter, UnitOfMeasure.milimeter, 3);
+                    return $"{a} {format} × {b} {format} × {c} {format}";
+                default:
+                    throw new FormatException();
+            }
+        }
 
         public Pudelko(double? a = null, double? b = null, double? c = null, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
