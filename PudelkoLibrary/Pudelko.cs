@@ -96,6 +96,26 @@ namespace PudelkoLibrary
             return !obj1.Equals(obj2);
         }
 
+        public static explicit operator double[](Pudelko obj)
+        {
+            return new double[] { obj.A, obj.B, obj.C };
+        }
+
+        public static explicit operator Pudelko(double[] obj)
+        {
+            return new Pudelko(obj[0], obj[1], obj[2]);
+        }
+
+        public static implicit operator ValueTuple<double, double, double>(Pudelko obj)
+        {
+            return (obj.A, obj.B, obj.C);
+        }
+
+        public static implicit operator Pudelko(ValueTuple<double, double, double> obj)
+        {
+            return new Pudelko(obj.Item1, obj.Item2, obj.Item3, UnitOfMeasure.milimeter);
+        }
+
         public Pudelko(double? a = null, double? b = null, double? c = null, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
             // Default dimensions: 10 cm × 10 cm × 10 cm
