@@ -447,16 +447,85 @@ namespace PudelkoUnitTests
 
 
         #region Pole, Objętość ===================================
-        // ToDo
+
+        [DataTestMethod]
+        [DataRow(1, 1.7, 10, 57.4)]
+        [DataRow(5, 6, 7, 214)]
+        [DataRow(2, 6, 1.8, 52.8)]
+        public void Pole_ReturnsArea(double a, double b, double c, double expectedArea)
+        {
+            var p = new Pudelko(a, b, c);
+            Assert.AreEqual(expectedArea, p.Pole);
+        }
+
+        [DataTestMethod]
+        [DataRow(1, 1.7, 10, 17)]
+        [DataRow(5, 6, 7, 210)]
+        [DataRow(2, 6, 1.8, 21.6)]
+        public void Objetosc_Returns_Volume(double a, double b, double c, double expectedVolume)
+        {
+            var p = new Pudelko(a, b, c);
+            Assert.AreEqual(expectedVolume, p.Objetosc);
+        }
 
         #endregion
 
         #region Equals ===========================================
-        // ToDo
+
+        [DataTestMethod]
+        [DataRow(1, 1, 1, 1, 1, 1.0001, true)]
+        [DataRow(1.1, 2.22, 3.333, 3.333, 2.22, 1.1, true)]
+        [DataRow(1.5, 2.5, 3.9, 1.4999, 2.5, 3.9, false)]
+        [DataRow(0.1, 1.001, 10, 1.002, 10, 0.1, false)]
+        public void Equals_ReturnsBool(double a1, double b1, double c1, double a2, double b2, double c2, bool expected)
+        {
+            var p1 = new Pudelko(a1, b1, c1);
+            var p2 = new Pudelko(a2, b2, c2);
+            Assert.AreEqual(expected, p1.Equals(p2));
+        }
+
         #endregion
 
         #region Operators overloading ===========================
-        // ToDo
+
+        [DataTestMethod]
+        [DataRow(1, 1, 1, 1, 1, 1.0001, true)]
+        [DataRow(1.1, 2.22, 3.333, 3.333, 2.22, 1.1, true)]
+        [DataRow(1.5, 2.5, 3.9, 1.4999, 2.5, 3.9, false)]
+        [DataRow(0.1, 1.001, 10, 1.002, 10, 0.1, false)]
+        public void Equal_operator(double a1, double b1, double c1, double a2, double b2, double c2, bool expected)
+        {
+            var p1 = new Pudelko(a1, b1, c1);
+            var p2 = new Pudelko(a2, b2, c2);
+            Assert.AreEqual(expected, p1 == p2);
+        }
+
+        [DataTestMethod]
+        [DataRow(1, 1, 1, 1, 1, 1.0001, false)]
+        [DataRow(1.1, 2.22, 3.333, 3.333, 2.22, 1.1, false)]
+        [DataRow(1.5, 2.5, 3.9, 1.4999, 2.5, 3.9, true)]
+        [DataRow(0.1, 1.001, 10, 1.002, 10, 0.1, true)]
+        public void NotEqual_operator(double a1, double b1, double c1, double a2, double b2, double c2, bool expected)
+        {
+            var p1 = new Pudelko(a1, b1, c1);
+            var p2 = new Pudelko(a2, b2, c2);
+            Assert.AreEqual(expected, p1 != p2);
+        }
+
+        [DataTestMethod]
+        [DataRow(9, 9, 9, 1, 1, 1.0001, 10, 10, 10)]
+        [DataRow(1.6, 4.9, 0.33, 4.9, 1.6, 0.33, 0.66, 3.2, 9.8)]
+        [DataRow(5.75, 1.006, 1, 4.001, 4.009, 4, 5, 5.007, 9.759)]
+        public void Plus_operator(double a1, double b1, double c1, double a2, double b2, double c2, double expectedA, double expectedB, double expectedC)
+        {
+            var p1 = new Pudelko(a1, b1, c1);
+            var p2 = new Pudelko(a2, b2, c2);
+            var sumP = p1 + p2;
+            Assert.AreEqual(expectedA, sumP.A);
+            Assert.AreEqual(expectedB, sumP.B);
+            Assert.AreEqual(expectedC, sumP.C);
+        }
+
         #endregion
 
         #region Conversions =====================================

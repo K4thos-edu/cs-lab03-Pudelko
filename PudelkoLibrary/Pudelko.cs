@@ -198,9 +198,9 @@ namespace PudelkoLibrary
             {
                 throw new ArgumentOutOfRangeException("Pudelko dimensions must be larger than 0");
             }
-            if (A >= 10 || B >= 10 || C >= 10)
+            if (A > 10 || B > 10 || C > 10)
             {
-                throw new ArgumentOutOfRangeException("Pudelko dimensions must be smaller than 10 m");
+                throw new ArgumentOutOfRangeException("Pudelko dimensions must be smaller or equal 10 m");
             }
         }
     }
