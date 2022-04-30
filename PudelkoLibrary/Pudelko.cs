@@ -127,6 +127,24 @@ namespace PudelkoLibrary
             return new Pudelko(a1[0] + a2[0], a1[1] + a2[1], a1[2] + a2[2]);
         }
 
+        public double this[int index]
+        {
+            get
+            {
+                switch (index)
+                {
+                    case 0:
+                        return A;
+                    case 1:
+                        return B;
+                    case 2:
+                        return C;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
         public Pudelko(double? a = null, double? b = null, double? c = null, UnitOfMeasure unit = UnitOfMeasure.meter)
         {
             // Default dimensions: 10 cm × 10 cm × 10 cm
